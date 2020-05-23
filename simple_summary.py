@@ -64,7 +64,7 @@ def main():
 
 
     if not api_token:
-        print("You must define a valid API token using the MIST_TOKEN var name to use this script...exiting.")
+        print("You must define a valid API token using the MIST_TOKEN environmental variable name to use this script...exiting.")
         sys.exit()
     
     with requests.Session() as session:    
