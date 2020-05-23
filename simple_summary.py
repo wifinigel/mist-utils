@@ -18,6 +18,7 @@ import json
 import requests
 import logging
 import sys
+import time
 
 # set up logging to console
 logger = logging.getLogger('mist_api')
@@ -77,6 +78,8 @@ def mist_request(url, session):
 
 def main():
 
+    start_time = time.time()
+
     if not api_token:
         print("You must define a valid API token using the MIST_TOKEN environmental variable name to use this script...exiting.")
         sys.exit()
@@ -121,6 +124,9 @@ def main():
         print("\n")
     
     logger.info("Script complete.")
+    run_time = time.time() - start_time
+    print("")
+    print("** Time to run: %s sec" % round(run_time, 2))
 
 if __name__ == "__main__":
     main()
