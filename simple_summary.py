@@ -1,3 +1,18 @@
+"""
+simple_summary.py - Create a simple summary of Mist organisaiton information
+
+To use this script, you must set the following environmental variables that
+are used by the script:
+
+    MIST_TOKEN - A valid API token created for access to your organization
+    MIST_ORG - The organization ID of your org
+
+These are required to prevent the requirement for hard coding them in to
+script of an accompanying config file. These variables should be created
+as env vars that are private to your environment, not global vars on the 
+machine that you are working on.
+"""
+
 import os
 import json
 import requests
