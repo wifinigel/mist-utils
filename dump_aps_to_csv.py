@@ -97,8 +97,6 @@ def main():
         logger.info("Getting sites info.")
         sites = mist_request(sites_url, session)
 
-        #print("\nOrganization sites: \n")
-
         # Create sites dict based on response
         sites_lookup = {}
 
@@ -108,7 +106,6 @@ def main():
             site_name = site['name']
 
             sites_lookup[site_id] = site_name
-        
 
         # Get my device inventory
         logger.info("Getting device inventory info.")
