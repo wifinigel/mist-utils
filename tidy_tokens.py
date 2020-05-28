@@ -11,7 +11,7 @@ are used by the script:
 
     MIST_TOKEN - A valid API token created for access to your organization
 
-These are required to prevent the requirement for hard coding them in to
+This is required to prevent the requirement for hard coding them in to
 script of an accompanying config file. It should be created as an env_var
 that is private to your environment, not a global var on the machine that
 you are working on.
@@ -136,7 +136,7 @@ def main():
             logger.info("No tokens to tidy up.")
     
     logger.info("Script complete.")
-    
+
     run_time = time.time() - start_time
     print("")
     print("** Time to run: %s sec" % round(run_time, 2))
