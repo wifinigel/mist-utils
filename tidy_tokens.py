@@ -1,3 +1,22 @@
+"""
+tidy_tokens.py - Tidy up unused API tokens
+
+This script will remove all API tokens for your account, except
+the token being used to run this script. This mitigates potential
+security issues with old tokens being left lying around in your
+Mist account.
+
+To use this script, you must set the following environmental variables that
+are used by the script:
+
+    MIST_TOKEN - A valid API token created for access to your organization
+
+These are required to prevent the requirement for hard coding them in to
+script of an accompanying config file. It should be created as an env_var
+that is private to your environment, not a global var on the machine that
+you are working on.
+"""
+
 import os
 import json
 import requests
@@ -117,6 +136,7 @@ def main():
             logger.info("No tokens to tidy up.")
     
     logger.info("Script complete.")
+    
     run_time = time.time() - start_time
     print("")
     print("** Time to run: %s sec" % round(run_time, 2))
