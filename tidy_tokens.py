@@ -5,7 +5,6 @@ import logging
 import sys
 import time
 from pprint import pprint
-from getpass import getpass
 
 # set up logging to console
 logger = logging.getLogger('mist_api')
@@ -55,28 +54,6 @@ def mist_get(url, session):
     """
 
     response = session.get(url, headers=headers)
-
-    if response.status_code == 200:
-        return json.loads(response.content.decode('utf-8'))
-    else:
-        raise Exception('Query to Mist API failed: {} (check token or req URL format?)'.format(response.status_code))
-
-def mist_post(url, session, data):
-    """function to post data structure to Mist API using a requests session
-
-    Arguments:
-        url {str} -- [Full URL of API call]
-        session {requests session obj} -- [session object created using requests]
-        data {dict} -- [data dict structure]
-
-    Raises:
-        Exception: [Generic failure message if http post fails]
-
-    Returns:
-        [boolean] -- [True = post OK, False = bad post]
-    """
-
-    response = session.post(url, headers=headers, data=json.dumps(data))
 
     if response.status_code == 200:
         return json.loads(response.content.decode('utf-8'))
