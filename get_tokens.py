@@ -32,20 +32,12 @@ org_id = os.environ.get('MIST_ORG')
 
 # define URLs
 base_url = "https://api.mist.com"
-login_url = "{}/api/v1/login".format(base_url)
 tokens_url = "{}/api/v1/self/apitokens".format(base_url)
-
-sites_url = "{}/api/v1/orgs/{}/sites".format(base_url, org_id)
-org_wlans_url = "{}/api/v1/orgs/{}/wlans".format(base_url, org_id)
-inventory_url = "{}/api/v1/orgs/{}/inventory".format(base_url, org_id)
-
-email = ''
-password = ''
 
 # define common headers
 headers = {
         'Content-Type': 'application/json',
-        #'Authorization': 'Token {}'.format(api_token)
+        'Authorization': 'Token {}'.format(api_token)
 }
 
 def mist_get(url, session):
@@ -93,28 +85,17 @@ def mist_post(url, session, data):
 
 def main():
 
-    email = ''
-    password = ''
-
     start_time = time.time()
 
     if not api_token:
-        email = input("Enter Mist email address: ")
-        password = getpass()
+        print("You must define a valid API key using the MIST_TOKEN environmental variable name to use this script...exiting.")
+        sys.exit()
            
     if not org_id:
         print("You must define a valid organization ID using the MIST_ORG environmental variable name to use this script...exiting.")
         sys.exit()
     
     with requests.Session() as session:    
-
-        if not api_token:
-            # Login with email/pwd
-            logger.info("Logging in.")
-            data = { "email": email, "password": password}
-            login = mist_post(login_url, session, data)
-
-            pprint(login)
 
         # List tokens
         logger.info("Getting tokens.")
