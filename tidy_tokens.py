@@ -27,7 +27,6 @@ logger.info("Starting script...")
 
 # define required credential & org id
 api_token = os.environ.get('MIST_TOKEN')
-org_id = os.environ.get('MIST_ORG')
 
 # define URLs
 base_url = "https://api.mist.com"
@@ -89,10 +88,6 @@ def main():
         print("You must define a valid API key using the MIST_TOKEN environmental variable name to use this script...exiting.")
         sys.exit()
            
-    if not org_id:
-        print("You must define a valid organization ID using the MIST_ORG environmental variable name to use this script...exiting.")
-        sys.exit()
-    
     with requests.Session() as session:    
 
         # List tokens
