@@ -19,7 +19,6 @@ import os
 import sys
 import time
 from pprint import pprint
-from getpass import getpass
 
 from modules.core.logger import ScriptLogger
 from modules.core.mist_verbs import MistVerbs
