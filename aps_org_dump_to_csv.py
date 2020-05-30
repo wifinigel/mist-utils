@@ -22,13 +22,21 @@ import sys
 import time
 import csv
 from datetime import datetime
+import argparse
 
 from modules.core.logger import ScriptLogger
+from modules.core.mist_verbs import MistVerbs
+from modules.core.stopwatch import StopWatch
+from modules.core.banner import header, footer
+
+# create parser args
+parse_descr = "Script to dump all APs of an org in to a CSV report (date-stamped reports dumped in the 'reports' folder) \n"
+parser = argparse.ArgumentParser(description=parse_descr)
+
+args = parser.parse_args()
 
 # set up logging
 logger = ScriptLogger('mist_api')
-
-logger.info("Starting script...")
 
 # define required credential & org id
 api_token = os.environ.get('MIST_TOKEN')
@@ -40,38 +48,12 @@ sites_url = "{}/api/v1/orgs/{}/sites".format(base_url, org_id)
 inventory_url = "{}/api/v1/orgs/{}/inventory".format(base_url, org_id)
 
 # define CSV file name
-report_file = 'reports/Device_Inventory_' + str(datetime.now().strftime('%Y_%m_%d_%H_%M_%S')) + '.csv'
-
-# define common headers
-headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'Token {}'.format(api_token)
-}
-
-def mist_request(url, session):
-    """function to return data structure from Mist API using a requests session
-
-    Arguments:
-        url {str} -- [Full URL of API call]
-        session {requests session obj} -- [session object created using requests]
-
-    Raises:
-        Exception: [Generic failure message if http request fails]
-
-    Returns:
-        [data structure] -- [Data structure returned - varies with API call]
-    """
-
-    response = session.get(url, headers=headers)
-
-    if response.status_code == 200:
-        return json.loads(response.content.decode('utf-8'))
-    else:
-        raise Exception('Query to Mist API failed: {} (check token or req URL format?)'.format(response.status_code))
+report_file = 'reports/AP_Inventory_Org_' + str(datetime.now().strftime('%Y_%m_%d_%H_%M_%S')) + '.csv'
 
 def main():
 
-    start_time = time.time()
+    timer = StopWatch()
+    timer.start()
 
     if not api_token:
         print("You must define a valid API token using the MIST_TOKEN environmental variable name to use this script...exiting.")
@@ -81,39 +63,40 @@ def main():
         print("You must define a valid organization ID using the MIST_ORG environmental variable name to use this script...exiting.")
         sys.exit()
     
-    with requests.Session() as session:    
+    header()
 
-        # Get my org sites
-        logger.info("Getting sites info.")
-        sites = mist_request(sites_url, session)
+    # Get my org sites
+    logger.info("Getting sites info.")
+    verb_obj = MistVerbs(api_token)
+    sites = verb_obj.mist_read(sites_url)
 
-        # Create sites dict based on response
-        sites_lookup = {}
+    # Create sites dict based on response
+    sites_lookup = {}
 
-        for site in sites:
+    for site in sites:
 
-            site_id = site['id']
-            site_name = site['name']
+        site_id = site['id']
+        site_name = site['name']
 
-            sites_lookup[site_id] = site_name
+        sites_lookup[site_id] = site_name
+    
+    # Get my device inventory
+    logger.info("Getting device inventory info.")
+    devices = verb_obj.mist_read(inventory_url)
 
-        # Get my device inventory
-        logger.info("Getting device inventory info.")
-        devices = mist_request(inventory_url, session)
+    dict_data = []
+    
+    for device in devices:
+        dict = {
+            "device_name": device['name'],
+            "device_model": device['model'],
+            "device_type": device['type'],
+            "device_serial": device['serial'],
+            "site_name": sites_lookup[device['site_id']],
+        }
 
-        dict_data = []
-        
-        for device in devices:
-            dict = {
-                "device_name": device['name'],
-                "device_model": device['model'],
-                "device_type": device['type'],
-                "device_serial": device['serial'],
-                "site_name": sites_lookup[device['site_id']],
-            }
-
-            if device['type'] == 'ap':
-                dict_data.append(dict)
+        if device['type'] == 'ap':
+            dict_data.append(dict)
 
     logger.info("Dumping CSV device report file: {}.".format(report_file))
 
@@ -131,9 +114,10 @@ def main():
         logger.error("CSV I/O error: {}".format(err))
     
     logger.info("Script complete.")
-    run_time = time.time() - start_time
-    print("")
-    print("** Time to run: %s sec" % round(run_time, 2))
+
+    timer.stop()
+
+    footer()
 
 if __name__ == "__main__":
     main()
