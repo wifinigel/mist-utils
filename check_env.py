@@ -9,7 +9,7 @@ Checks:
  2. Network connectivity: can we get to api.mist.com?
  3. Have we got an API key configured?
  4. Can we do a basic API call?
- 
+
 """
 
 import requests
@@ -21,7 +21,7 @@ from http.client import responses
 
 def check_env():
 
-    banner_width = 60
+    banner_width = 70
 
     print("=" * banner_width)
     print("\nExecuting tests to check if our environment is \nsuitable to use Mist API:\n")
@@ -46,7 +46,7 @@ def check_env():
     except:
         print("   Result: ** Fail ** (Check network path available to {})\n".format(base_url))
   
-    print("3. Checking we have an API key defined...")
+    print("3. Checking we have an API key defined (via env var MIST_TOKEN)...")
     api_token = os.environ.get('MIST_TOKEN')
 
     if api_token:
@@ -80,7 +80,7 @@ def check_env():
         print("   Result: ** Fail **. (Please check network connectivity)\n")
 
     
-    print("\n  -- Tests complete. --")
+    print("\n  -- Tests complete --")
     print("=" * banner_width)
 
     
