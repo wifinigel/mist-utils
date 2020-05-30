@@ -22,6 +22,9 @@ from modules.core.banner import header, footer
 
 def check_env():
 
+    total_tests = 4
+    passed_count = 0
+
     header()
 
     print("Executing tests to check if our environment is \nsuitable to use Mist API:\n")
@@ -31,6 +34,7 @@ def check_env():
     try:
         socket.gethostbyname("api.mist.com")
         print("   Result: OK.\n")
+        passed_count += 1
     except:
         print("   Result: ** Fail ** (Check your DNS settings or network connectivity) .\n")
 
@@ -43,6 +47,7 @@ def check_env():
     try:
         session.get(base_url, timeout=1)
         print("   Result: OK.\n")
+        passed_count += 1
     except:
         print("   Result: ** Fail ** (Check network path available to {})\n".format(base_url))
   
@@ -51,6 +56,7 @@ def check_env():
 
     if api_token:
         print("   Result: OK.\n")
+        passed_count += 1
     else:
         print("   Result: ** Fail **. (Please define the env var MIST_TOKEN)\n")
     
@@ -71,7 +77,7 @@ def check_env():
             data = json.loads(response.content.decode('utf-8'))
             print("      Name: {} {}".format(data['first_name'], data['last_name']))
             print("      Email: {}".format(data['email']))
-            #pprint(json.loads(response.content.decode('utf-8')))
+            passed_count += 1
         else:
             status_code = response.status_code
             print("   Result: ** Fail. ** (reponse received, but expected data was not received (code: {}, text: {}))".format(status_code, responses[status_code]))
@@ -80,7 +86,7 @@ def check_env():
         print("   Result: ** Fail **. (Please check network connectivity)\n")
 
     
-    print("\n  -- Tests complete --")
+    print("\n  -- Tests complete (passed {}/{}) --".format(passed_count, total_tests))
     footer()
 
     
