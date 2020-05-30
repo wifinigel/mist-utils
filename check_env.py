@@ -18,13 +18,13 @@ import socket
 import json
 from pprint import pprint
 from http.client import responses
+from modules.core.banner import header, footer
 
 def check_env():
 
-    banner_width = 70
+    header()
 
-    print("=" * banner_width)
-    print("\nExecuting tests to check if our environment is \nsuitable to use Mist API:\n")
+    print("Executing tests to check if our environment is \nsuitable to use Mist API:\n")
 
     print("1. Checking our DNS is good (looking up api.mist.com)...")
 
@@ -81,7 +81,7 @@ def check_env():
 
     
     print("\n  -- Tests complete --")
-    print("=" * banner_width)
+    footer()
 
     
 

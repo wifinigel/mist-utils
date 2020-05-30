@@ -27,6 +27,7 @@ from pprint import pprint
 from modules.core.logger import ScriptLogger
 from modules.core.mist_verbs import MistVerbs
 from modules.core.stopwatch import StopWatch
+from modules.core.banner import header, footer
 
 # set up logging
 logger = ScriptLogger('mist_api')
@@ -47,7 +48,9 @@ def main():
     if not api_token:
         print("You must define a valid API key using the MIST_TOKEN environmental variable name to use this script...exiting.")
         sys.exit()
-           
+    
+    header()
+
     # List tokens
     logger.info("Getting tokens.")
     
@@ -78,6 +81,8 @@ def main():
     logger.info("Script complete.")
 
     timer.stop()
+
+    footer()
 
 if __name__ == "__main__":
     main()

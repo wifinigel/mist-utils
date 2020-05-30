@@ -20,26 +20,12 @@ import logging
 import sys
 import time
 import csv
+from datetime import datetime
 
-# Report file name
-report_file = 'Devices.csv'
+from modules.core.logger import ScriptLogger
 
-# set up logging to console
-logger = logging.getLogger('mist_api')
-logger.setLevel(logging.INFO)
-
-# create console handler & set level
-console_handler = logging.StreamHandler()
-console_handler.setLevel(logging.DEBUG)
-
-# create formatter
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-
-# add formatter to console handler
-console_handler.setFormatter(formatter)
-
-# add console handler to logger
-logger.addHandler(console_handler)
+# set up logging
+logger = ScriptLogger('mist_api')
 
 logger.info("Starting script...")
 
@@ -51,6 +37,9 @@ org_id = os.environ.get('MIST_ORG')
 base_url = "https://api.mist.com"
 sites_url = "{}/api/v1/orgs/{}/sites".format(base_url, org_id)
 inventory_url = "{}/api/v1/orgs/{}/inventory".format(base_url, org_id)
+
+# define CSV file name
+report_file = 'reports/Device_Inventory_' + str(datetime.now().strftime('%Y_%m_%d_%H_%M_%S')) + '.csv'
 
 # define common headers
 headers = {
@@ -129,7 +118,7 @@ def main():
     column_headers = ["device_name", "device_model", "device_type", "device_serial", "site_name"]
 
     try:
-        with open(report_file, 'w') as csvfile:
+        with open(report_file, 'w', newline='') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=column_headers)
             writer.writeheader()
 

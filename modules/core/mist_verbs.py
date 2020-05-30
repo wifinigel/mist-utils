@@ -1,5 +1,7 @@
 import requests
 import json
+import sys
+from http.client import responses
 
 from modules.core.logger import ScriptLogger
 
@@ -20,6 +22,7 @@ class MistVerbs(object):
         self.read_only = read_only
         self.session = requests.Session()
         self.logger = ScriptLogger('MistVerbs')
+        self.response_headers = ''
 
         # define common headers
         self.headers = {
@@ -43,11 +46,13 @@ class MistVerbs(object):
         """
 
         response = self.session.get(url, headers=self.headers)
+        self.response_headers = response.headers
 
         if response.status_code == 200:
             return json.loads(response.content.decode('utf-8'))
         else:
-            raise Exception('Query to Mist API failed: {} (check token or req URL format?) - Bad URL: {}'.format(response.status_code, url))
+            print('** Query to Mist API failed: {} (check token or req URL format?) - Bad URL: {}'.format(responses[response.status_code], url))
+            sys.exit()
 
     def mist_create(self, url, data=''):
         """function to post data structure to Mist API using a requests session. This
@@ -68,19 +73,23 @@ class MistVerbs(object):
         # check if object is read only
         if self.read_only:
             self.logger.error('Object is read only...exiting')
-            raise Exception('Object is read-only. If you intend to perform write/update/delete operations, set read_only=False when creating object')
+            print('** Object is read-only. If you intend to perform write/update/delete operations, set read_only=False when creating object')
+            sys.exit()
 
         response = None
 
         if data:
             response = self.session.post(url, headers=self.headers, data=json.dumps(data))
+            self.response_headers = response.headers
         else:
             response = self.session.post(url, headers=self.headers)
+            self.response_headers = response.headers
 
         if response.status_code == 200:
             return json.loads(response.content.decode('utf-8'))
         else:
-            raise Exception('Query to Mist API failed: {} (check token or req URL format?) - bad URL: {}'.format(response.status_code, url))
+            print('** Query to Mist API failed: {} (check token or req URL format?) - bad URL: {}'.format(responses[response.status_code], url))
+            sys.exit()
 
     def mist_update(self, url, data):
         """function to put data structure to Mist API using a requests session. This
@@ -101,14 +110,17 @@ class MistVerbs(object):
         # check if object is read only
         if self.read_only:
             self.logger.error('Object is read only...exiting')
-            raise Exception('Object is read-only. If you intend to perform write/update/delete operations, set read_only=False when creating object')
+            print('Object is read-only. If you intend to perform write/update/delete operations, set read_only=False when creating object')
+            sys.exit()
 
         response = self.session.put(url, headers=self.headers, data=json.dumps(data))
+        self.response_headers = response.headers
 
         if response.status_code == 200:
             return json.loads(response.content.decode('utf-8'))
         else:
-            raise Exception('Query to Mist API failed: {} (check token or req URL format?)'.format(response.status_code))
+            print('** Query to Mist API failed: {} (check token or req URL format?)'.format(responses[response.status_code]))
+            sys.exit()
 
     def mist_delete(self, url):
         """function to delete object from Mist API using a requests session
@@ -130,8 +142,10 @@ class MistVerbs(object):
             raise Exception('Object is read-only. If you intend to perform write/update/delete operations, set read_only=False when creating object')
         
         response = self.session.delete(url, headers=self.headers)
+        self.response_headers = response.headers
 
         if response.status_code == 200:
             return json.loads(response.content.decode('utf-8'))
         else:
-            raise Exception('Query to Mist API failed: {} (check token or req URL format?) - Bad URL: {}'.format(response.status_code, url))
+            print('** Query to Mist API failed: {} (check token or req URL format?) - Bad URL: {}'.format(responses[response.status_code], url))
+            sys.exit()

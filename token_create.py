@@ -25,6 +25,8 @@ from pprint import pprint
 from modules.core.logger import ScriptLogger
 from modules.core.mist_verbs import MistVerbs
 from modules.core.stopwatch import StopWatch
+from modules.core.banner import header, footer
+
 
 # set up logging
 logger = ScriptLogger('mist_api')
@@ -48,12 +50,18 @@ def main():
     # Create tokens  
     verb_obj = MistVerbs(api_token, False)
     token = verb_obj.mist_create(tokens_url)
-    print("Token created:")
-    pprint(token)
+
+    header()
+    
+    print("Please record the API token key shown below, this is only avaiable \n at the time of creation and cannot be retrieved later:")
+    print("\n  Token key: {}".format(token['key']))
+    print("\n (Token ID, which is not required for API access: {} \n".format(token['id']))
   
     logger.info("Script complete.")
 
     timer.stop()
+
+    footer()
 
 if __name__ == "__main__":
     main()
