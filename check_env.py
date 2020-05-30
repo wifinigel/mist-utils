@@ -5,8 +5,11 @@ before trying to execute any scripts
 
 Checks:
 
- 1. Network connectivity: can we get to api.mist.com?
- 2. Have we got an API key configured?
+ 1. DNS lookup
+ 2. Network connectivity: can we get to api.mist.com?
+ 3. Have we got an API key configured?
+ 4. Can we do a basic API call?
+ 
 """
 
 import requests
