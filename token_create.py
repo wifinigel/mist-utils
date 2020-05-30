@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 token_create.py - Tidy up unused API tokens
 
@@ -18,12 +19,12 @@ you are working on.
 """
 
 import os
-import time
 import sys
 from pprint import pprint
 
 from modules.core.logger import ScriptLogger
 from modules.core.mist_verbs import MistVerbs
+from modules.core.stopwatch import StopWatch
 
 # set up logging
 logger = ScriptLogger('mist_api')
@@ -37,7 +38,8 @@ tokens_url = "{}/api/v1/self/apitokens".format(base_url)
 
 def main():
 
-    start_time = time.time()
+    timer = StopWatch()
+    timer.start()
 
     if not api_token:
         print("You must define a valid API key using the MIST_TOKEN environmental variable name to use this script...exiting.")
@@ -51,9 +53,7 @@ def main():
   
     logger.info("Script complete.")
 
-    run_time = time.time() - start_time
-    print("")
-    print("** Time to run: %s sec" % round(run_time, 2))
+    timer.stop()
 
 if __name__ == "__main__":
     main()

@@ -47,7 +47,7 @@ class MistVerbs(object):
         if response.status_code == 200:
             return json.loads(response.content.decode('utf-8'))
         else:
-            raise Exception('Query to Mist API failed: {} (check token or req URL format?)'.format(response.status_code))
+            raise Exception('Query to Mist API failed: {} (check token or req URL format?) - Bad URL: {}'.format(response.status_code, url))
 
     def mist_create(self, url, data=''):
         """function to post data structure to Mist API using a requests session. This
@@ -80,7 +80,7 @@ class MistVerbs(object):
         if response.status_code == 200:
             return json.loads(response.content.decode('utf-8'))
         else:
-            raise Exception('Query to Mist API failed: {} (check token or req URL format?)'.format(response.status_code))
+            raise Exception('Query to Mist API failed: {} (check token or req URL format?) - bad URL: {}'.format(response.status_code, url))
 
     def mist_update(self, url, data):
         """function to put data structure to Mist API using a requests session. This
@@ -134,4 +134,4 @@ class MistVerbs(object):
         if response.status_code == 200:
             return json.loads(response.content.decode('utf-8'))
         else:
-            raise Exception('Query to Mist API failed: {} (check token or req URL format?)'.format(response.status_code))
+            raise Exception('Query to Mist API failed: {} (check token or req URL format?) - Bad URL: {}'.format(response.status_code, url))
