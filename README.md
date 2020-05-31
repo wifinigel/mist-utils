@@ -1,6 +1,6 @@
 # Mist-Utils
 
-A few Mist utilities I'm creating while learning more about the Mist API...
+A few Mist utilities I'm creating while learning more about the Mist API. I'm trying to build a collection of scripts that can be run by an engineer to list or dump useful data.
 
 
 # Useful resources:
@@ -23,5 +23,7 @@ A few Mist utilities I'm creating while learning more about the Mist API...
 # Usage
 
 Pull (clone or download the zip file) the repo from GitHub and execute the scripts you require.
+
+Note: you need to set your Mist API token in the env var MIST_TOKEN to use these scripts.
 
 (Note this repo is under development)
