@@ -27,13 +27,16 @@ from pprint import pprint
 from modules.core.logger import ScriptLogger
 from modules.core.mist_verbs import MistVerbs
 from modules.core.stopwatch import StopWatch
+from modules.core.get_vars import GetVars
 from modules.core.banner import header, footer
 
 # set up logging
 logger = ScriptLogger('mist_api')
 
-# define required credential & org id
-api_token = os.environ.get('MIST_TOKEN')
+# supply required token
+vars_obj = GetVars()
+vars_found = vars_obj.find_vars()
+api_token = vars_found.get('token')
 
 # define URLs
 base_url = "https://api.mist.com"

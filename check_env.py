@@ -19,6 +19,12 @@ import json
 from pprint import pprint
 from http.client import responses
 from modules.core.banner import header, footer
+from modules.core.get_vars import GetVars
+
+# supply required token
+vars_obj = GetVars()
+vars_found = vars_obj.find_vars()
+api_token = vars_found.get('token')
 
 def check_env():
 
@@ -52,7 +58,6 @@ def check_env():
         print("   Result: ** Fail ** (Check network path available to {})\n".format(base_url))
   
     print("3. Checking we have an API key defined (via env var MIST_TOKEN)...")
-    api_token = os.environ.get('MIST_TOKEN')
 
     if api_token:
         print("   Result: OK.\n")

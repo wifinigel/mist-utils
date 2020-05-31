@@ -22,6 +22,7 @@ import sys
 import time
 
 from modules.core.stopwatch import StopWatch
+from modules.core.get_vars import GetVars
 
 # set up logging to console
 logger = logging.getLogger('mist_api')
@@ -42,9 +43,11 @@ logger.addHandler(console_handler)
 
 logger.info("Starting script...")
 
-# define required credential & org id
-api_token = os.environ.get('MIST_TOKEN')
-org_id = os.environ.get('MIST_ORG')
+# supply required token
+vars_obj = GetVars()
+vars_found = vars_obj.find_vars()
+api_token = vars_found.get('token')
+org_id = vars_found.get('org_id')
 
 # define URLs
 base_url = "https://api.mist.com"
