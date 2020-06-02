@@ -55,11 +55,11 @@ def main():
     
     header()
 
-    logger.info("Getting tokens.")
+    logger.info("Getting clients.")
     
     verb_obj = MistVerbs(api_token)
-    tokens = verb_obj.mist_read(clients_url)
-    pprint(tokens)
+    clients = verb_obj.mist_read(clients_url)
+    pprint(clients)
 
     logger.info("Script complete.")
     timer.stop()
