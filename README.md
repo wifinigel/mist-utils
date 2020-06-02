@@ -18,6 +18,7 @@ A few Mist utilities I'm creating while learning more about the Mist API. I'm tr
 * aps_site_dump_to_csv.py - dump an site's AP info in to a CSV file
 * check_env.py - check if our env is set up to use the Mist API
 * clients_list_site_apple.py - list Apple clients on a site
+* clients_list_site_apple_to_csv.py - dump all Apple clients on a site to a CSV file
 * token_create.py - create an API token
 * token_lisy.py - list the token we currently have created
 * simple_summary.py - very simple overview listing of your org
