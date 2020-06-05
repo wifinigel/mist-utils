@@ -2,8 +2,7 @@
 """
 clients_list_site_apple.py - List Apple clients on a site
 
-This script will list all API tokens currently created for your
-Mist login.
+This script will list all Apple clients on a specific site.
 
 To use this script, you must set the following environmental variables that
 are used by the script:
