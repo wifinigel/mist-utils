@@ -30,7 +30,7 @@ Pull (clone or download the zip file) the repo from GitHub and execute the scrip
 
 Note: you need to set your Mist API token in the env var MIST_TOKEN to use these scripts.
 
-# Using the Mist API Overview
+# Mist API Overview
 
 The Mist API allows you to perform a whole variety of operations on your organisation's Mist network instead of using their cloud dashboard.
 
