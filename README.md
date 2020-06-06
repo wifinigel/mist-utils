@@ -34,9 +34,9 @@ Note: you need to set your Mist API token in the env var MIST_TOKEN to use these
 
 The Mist API allows you to perform a whole variety of operations on your organisation's Mist network instead of using their cloud dashboard.
 
-This allows incredible flexibility if you would like to perform your own network automation on your network.
+This allows incredible flexibility if you would like to perform automation on your network.
 
-The examples provided in this repository demonstrate how to pull data from the network to provide status and reporting information. The target audience I had in mind when writing these scripts is very much network engineers who would like to pull of data to include in reports and documentation.
+The examples provided in this repository demonstrate how to pull data from the network to provide status and reporting information. The target audience I had in mind when writing these scripts is very much network engineers who would like to pull off infrastructure data to include in reports and documentation.
 
 The scripts are written in Python as everyone tells me a I need to be able to code and Python is the flavour of the moment.
 
