@@ -19,9 +19,10 @@ A few Mist utilities I'm creating while learning more about the Mist API. I'm tr
 * check_env.py - check if our env is set up to use the Mist API
 * clients_list_site_apple.py - list Apple clients on a site
 * clients_list_site_apple_to_csv.py - dump all Apple clients on a site to a CSV file
-* token_create.py - create an API token
-* token_lisy.py - list the token we currently have created
 * simple_summary.py - very simple overview listing of your org
+* token_create.py - create an API token
+* token_delete.py - remove a specific token
+* token_list.py - list the token we currently have created
 * token_tidy.py - tidy up our tokens by removing all except the token we are currently using
 
 # Usage
