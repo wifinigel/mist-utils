@@ -121,7 +121,7 @@ echo $MIST_TOKEN
 
 (Note, each time you close your terminal window, this will need to be repeated)
 
-Permanently set the env var:
+Permanently set the env var for all terminal windows you open:
 
 1. Open a terminal window
 2. Edit the file .profile using the Nano text editor:
@@ -156,7 +156,7 @@ echo %MIST_TOKEN%
 
 (Note, each time you close your command window, this will need to be repeated)
 
-Permanently set the env var:
+Permanently set the env var for all command windows you open:
 
 1. Click on the Windows start button
 2. Type the word "environment"
