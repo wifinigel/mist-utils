@@ -65,9 +65,35 @@ A token looks something like this:
 When a http request is set to a web server of API, a number of "headers" are sent with the request. These can contain a variety f data such a as cookies and information about the web client (e.g. the browser type). When we are making an API call to the Mist cloud, we have to include the token as header in the format of :
 
 ```
-  Token Nm3A2LkqTlgm8eDhnsZUjeJjdeuw6EAzvsoTgCYxtnkv51A2bcfjiGkAZB8QSgD3LCWeSzaHyeeyLFjouG6Ek7YroOcW1h
+  Authorization: Token Nm3A2LkqTlgm8eDhnsZUjeJjdeuw6EAzvsoTgCYxtnkv51A2bcfjiGkAZB8QSgD3LCWeSzaHyeeyLFjouG6Ek7YroOcW1h
 ```
 
 When the request is received by the mist API (at api.mist.com), it checks the token to see if it is valid and will then provide the appropriate access policy for that token. It will allow permissions such as read or write access, and will determine which organisations and sites may be accessed by the API call.
+
+### Getting an Authentication Token
+
+To create a token to use with scripts that perform operations via the Mist API, we need to login to the Mist dashboard with our username and password.  
+
+Next, perform the following steps:
+
+1. Login to the Mist dashboard with a browser
+
+2. Open a new tab in your browser
+
+3. Enter the following URL in your browser: https://api.mist.com/api/v1/self/apitokens
+
+4. Assuming you are correctly logged in to your Mist site, you will see a page similar to this:
+
+![no_tokens_image](images/no_tokens.png)
+
+5. This page shows us the token we have associated with our account. It should look like the image above (with an empty pair of square brackets in the upper highlighted area), assuming you have not created any token previously.
+
+6. Next we need to create a token by hitting the "Post" button highlighted in the image above. This will create a token for us.
+
+7. Now, we will see the token that as been generated for us. NOTE: You will only see this token once, so make sure you copy and paste it to somewhere safe. There is no way of retrieving a token later, the only option will to be generate a new token if you lose this one. The token field is shown in the image below. The value you need to save is the long string beginning 'CYbLfqGt' highlighted in the blue rectangle in the image below:
+
+![no_tokens_image](images/no_tokens.png)
+
+
 
 (Note this repo is under development)
