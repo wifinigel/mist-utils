@@ -92,7 +92,7 @@ Next, perform the following steps:
 
 7. Now, we will see the token that as been generated for us. NOTE: You will only see this token once, so make sure you copy and paste it to somewhere safe. There is no way of retrieving a token later, the only option will to be generate a new token if you lose this one. The token field is shown in the image below. The value you need to save is the long string beginning 'CYbLfqGt' highlighted in the blue rectangle in the image below:
 
-![no_tokens_image](images/no_tokens.png)
+![no_tokens_image](images/token.png)
 
 
 
