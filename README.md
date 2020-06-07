@@ -33,9 +33,9 @@ You'll need to do the following steps (which are all detailed in this document):
 
 1. Get an API token
 2. Set you environment to use the token
-3. Install Python 3 (if don;t already have it)
+3. Install Python 3 (if you don't already have it)
 4. Download the scripts
-5. test your environment works with the API
+5. Test your environment works with the API
 6. Run the scripts
 
 I'm assuming you have a Mist cloud dashboard account and an online AP or two to be able to perform the steps detailed in this document.
