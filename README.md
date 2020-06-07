@@ -94,6 +94,14 @@ Next, perform the following steps:
 
 ![no_tokens_image](images/token.png)
 
+### Using The Authentication Token
 
+Now that we have an authentication token we can use it to provide authentication to the Mist cloud for our script operations.
+
+The token created will be subject to the same access restrictions as our Mist dashboard account. For instance, if you do not have rights to delete APs with your dashboard login, your API token will also not be able to delete APs.
+
+As the API token is a valuable set of credentials that could allow anyone who gets hold of it to access your network, it needs to be protected in the same way as any other credentials. Embedding the credentials in your script is probably not a great idea, as if you share it or it is accessed in some other way then your security is compromised.
+
+A method that I like to use is to configure the token as an user-level environmental variable on the machine I am working on. This allows all of my scripts to access the token value, but it is only available to me. All of the scripts in this repo use this method. Therefore, you must set an environmental variable on your machine called MIST_TOKEN that contains the value of your token. All scripts will look for this value when they run - if it is not present, they will not run.
 
 (Note this repo is under development)
