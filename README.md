@@ -72,7 +72,7 @@ A token looks something like this:
     Nm3A2LkqTlgm8eDhnsZUjeJjdeuw6EAzvsoTgCYxtnkv51A2bcfjiGkAZB8QSgD3LCWeSzaHyeeyLFjouG6Ek7YroOcW1h
 ```
 
-When a http request is set to a web server of API, a number of "headers" are sent with the request. These can contain a variety f data such a as cookies and information about the web client (e.g. the browser type). When we are making an API call to the Mist cloud, we have to include the token as header in the format of :
+When a http request is set to a web server or API, a number of "headers" are sent with the request. These can contain a variety of data such as cookies and information about the web client (e.g. the browser type). When we are making an API call to the Mist cloud, we have to include the token as header in the format of :
 
 ```
   Authorization: Token Nm3A2LkqTlgm8eDhnsZUjeJjdeuw6EAzvsoTgCYxtnkv51A2bcfjiGkAZB8QSgD3LCWeSzaHyeeyLFjouG6Ek7YroOcW1h
