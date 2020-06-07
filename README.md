@@ -26,9 +26,18 @@ A few Mist utilities I'm creating while learning more about the Mist API. I'm tr
 
 # Usage
 
-Pull (clone or download the zip file) the repo from GitHub and execute the scripts you require.
+To use these scripts, you'll need to get your environment set up to run the scripts against your Mist network API.
 
-Note: you need to set your Mist API token in the env var MIST_TOKEN to use these scripts.
+You'll need to do the following steps (which are all detailed in this document):
+
+1. Get an API token
+2. Set you environment to use the token
+3. Install Python 3 (if don;t already have it)
+4. Download the scripts
+5. test your environment works with the API
+6. Run the scripts
+
+I'm assuming you have a Mist cloud dashboard account and an online AP or two to be able to perform the steps detailed in this document.
 
 # Mist API Overview
 
@@ -40,7 +49,7 @@ The examples provided in this repository demonstrate how to pull data from the n
 
 The scripts are written in Python as everyone tells me a I need to be able to code and Python is the flavour of the moment.
 
-## How We Pull Data Via An API ?
+## How Do We Pull Data Via An API ?
 
 The API allows us to read, write, update and delete data on our network. We'll be primarily reading data, as that is the safest option when we're sending API requests in to our network. I'll leave you to explore writing, updating and deleting stuff yourself...I don't fancy being responsible for giving you tools that may damage your network (...yes I'm a coward like that).
 
@@ -67,6 +76,8 @@ When a http request is set to a web server of API, a number of "headers" are sen
 ```
   Authorization: Token Nm3A2LkqTlgm8eDhnsZUjeJjdeuw6EAzvsoTgCYxtnkv51A2bcfjiGkAZB8QSgD3LCWeSzaHyeeyLFjouG6Ek7YroOcW1h
 ```
+
+(Note the handling of the token in headers is taken care of automatically in the scripts in this repo once you have created your own token, so don't worry too much about this detail.)
 
 When the request is received by the mist API (at api.mist.com), it checks the token to see if it is valid and will then provide the appropriate access policy for that token. It will allow permissions such as read or write access, and will determine which organisations and sites may be accessed by the API call.
 
@@ -178,6 +189,33 @@ echo %MIST_TOKEN%
 
 (Note: this env var will always be available in every command window you open until you remove it from the environment variables panel)
 
+## Getting Python
 
+You will need to have Python 3 installed on your machine to run the scripts in this repo. I cannot go through all of the steps required to do this, but you can get the Python software and installation instructions from : https://www.python.org/downloads/ (get the latest version of 3.x.x).
 
-(Note this repo is under development)
+Once you have installed Python, open a terminal and command window and type the command "python -V" (that's capital 'V') to ensure it is correctly installed (note some platforms may require you to type "python3 -V"). This is a good confidence check that your good to go:
+
+![python_version_image](images/python_version.png)
+
+## Getting The Scripts
+
+There are 2 methods of getting the scripts in this repo:
+
+1. Use git (if you have it installed) using the command 'git clone https://github.com/wifinigel/mist-utils.git'
+
+2. Download a zip file of all the repo files and unzip them on your machine: https://github.com/wifinigel/mist-utils/archive/master.zip
+
+## Running The Scripts
+
+Once you have downloaded the scripts, open a terminal or command windows and change directory to the folder you have created that contains the scripts.
+
+Next, try running the 'check_env.py' script. This will check your environment and connectivity to the Mist cloud:
+```
+python check_env.py
+```
+
+![check_env_image](images/check_env.png)
+
+If this passes all tests, you're good to go! I'll leave you to explore the other scripts yourself and hopefully create your own over time. Enjoy!!!
+
+(Note this repo is under development and additions will be made over time.)
