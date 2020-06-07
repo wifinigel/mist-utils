@@ -104,4 +104,80 @@ As the API token is a valuable set of credentials that could allow anyone who ge
 
 A method that I like to use is to configure the token as an user-level environmental variable on the machine I am working on. This allows all of my scripts to access the token value, but it is only available to me. All of the scripts in this repo use this method. Therefore, you must set an environmental variable on your machine called MIST_TOKEN that contains the value of your token. All scripts will look for this value when they run - if it is not present, they will not run.
 
+#### Setting the Env Var Token Value On A Mac
+
+Temporarily setting the value in a terminal window:
+
+1. Open a terminal window
+2. Enter the command:
+```
+MIST_TOKEN="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+(where the xxxxx is replaced with your token string)
+```
+3. Test it is set by executing the command (the configured token string should be shown):
+```
+echo $MIST_TOKEN
+```
+
+(Note, each time you close your terminal window, this will need to be repeated)
+
+Permanently set the env var:
+
+1. Open a terminal window
+2. Edit the file .profile using the Nano text editor:
+```
+nano .profile
+```
+3. Add the following line at the bottom of the file
+```
+MIST_TOKEN="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+(where the xxxxx is replaced with your token string)
+```
+4. Save the file using ctrl-x
+5. Close the terminal window and open a new one. Enter the following command to verify that the env var is set:
+```
+echo $MIST_TOKEN
+```
+
+#### Setting the Env Var Token Value On A Windows Machine
+
+Temporarily setting the value in a command window:
+
+1. Open a command window (i.e. CMD)
+2. Enter the command:
+```
+set MIST_TOKEN="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+(where the xxxxx is replaced with your token string)
+```
+3. Test it is set by executing the command (the configured token string should be shown):
+```
+echo %MIST_TOKEN%
+```
+
+(Note, each time you close your command window, this will need to be repeated)
+
+Permanently set the env var:
+
+1. Click on the Windows start button
+2. Type the word "environment"
+3. The option "Edit environment variables for your account" should appear in the search results - click on it
+4. In the "Environment Variables" panel that appears, we need to create an entry in the upper part of the panel in the user variables section.
+5. Hit the 'New' button and enter the env var details are shown below:
+
+![new_var_image](images/new_var.png)
+
+6. Once this has been created, the MIST_TOKEN variable should be shown as in the image below:
+
+![env_vars_image](images/env_vars.png)
+
+7. Open a new command window (i.e. CMD)
+8. Check that the env var is available by typing the command:
+```
+echo %MIST_TOKEN%
+```
+
+(Note: this env var will always be available in every command window you open until you remove it from the environment variables panel)
+
+
+
 (Note this repo is under development)
